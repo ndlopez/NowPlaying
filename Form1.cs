@@ -50,10 +50,10 @@ namespace NowPlaying
                     var nowSong = await GetDataAsync();
                     int myUpdate = 280000; //ms
                     //Console.WriteLine(nowSong);
-                    notifyIcon1.ShowBalloonTip(myUpdate, DateTime.Now.ToString("%H:%m") + " Now on FM La Paz", nowSong.ToString(), ToolTipIcon.Info);
+                    notifyIcon1.ShowBalloonTip(myUpdate, DateTime.Now.ToString("HH:mm") + " Now on FM La Paz", nowSong.ToString(), ToolTipIcon.Info);
 
                 }
-                catch (Exception){ Console.WriteLine("Async onnection error"); }
+                catch (Exception){ Console.WriteLine("Async connection error"); }
                 
             }
         }
