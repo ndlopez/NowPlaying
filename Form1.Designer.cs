@@ -31,7 +31,7 @@ namespace NowPlaying
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.label1 = new System.Windows.Forms.Label();
+            this.nowPlayingLabel = new System.Windows.Forms.Label();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.showToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -39,15 +39,15 @@ namespace NowPlaying
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // label1
+            // nowPlayingLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(21, 18);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(313, 48);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Now on FM La Paz";
+            this.nowPlayingLabel.AutoSize = true;
+            this.nowPlayingLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.nowPlayingLabel.Location = new System.Drawing.Point(21, 18);
+            this.nowPlayingLabel.Name = "nowPlayingLabel";
+            this.nowPlayingLabel.Size = new System.Drawing.Size(313, 48);
+            this.nowPlayingLabel.TabIndex = 0;
+            this.nowPlayingLabel.Text = "Now on FM La Paz";
             // 
             // contextMenuStrip1
             // 
@@ -85,7 +85,7 @@ namespace NowPlaying
             this.AutoScaleDimensions = new System.Drawing.SizeF(15F, 37F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(533, 87);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.nowPlayingLabel);
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -99,7 +99,7 @@ namespace NowPlaying
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label nowPlayingLabel;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem showToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
