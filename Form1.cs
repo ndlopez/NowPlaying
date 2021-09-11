@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Display notification on the Windows tray
+ * Now Playing on FM La Paz
+ * Developer: ndzerglink (github.com/ndlopez)
+ * Updated on 2021-09-11
+ * References:
+ * [1] https://zetcode.com/csharp/json/
+ * [2] https://youtu.be/-6bvqwVYwMY
+ * [3] https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/async
+*/
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -39,7 +49,7 @@ namespace NowPlaying
                 {
                     var nowSong = await GetDataAsync();
                     //Console.WriteLine(nowSong);
-                    notifyIcon1.ShowBalloonTip(5000, DateTime.Now.ToString("%H:%m") + " Now on FM La Paz", nowSong.ToString(), ToolTipIcon.Info);
+                    notifyIcon1.ShowBalloonTip(10000, DateTime.Now.ToString("%H:%m") + " Now on FM La Paz", nowSong.ToString(), ToolTipIcon.Info);
 
                 }
                 catch (Exception){ Console.WriteLine("Async onnection error"); }
