@@ -45,10 +45,9 @@ namespace NowPlaying
             this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label1.Location = new System.Drawing.Point(21, 18);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(312, 48);
+            this.label1.Size = new System.Drawing.Size(313, 48);
             this.label1.TabIndex = 0;
-            this.label1.Text = "System Tray Demo";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+            this.label1.Text = "Now on FM La Paz";
             // 
             // contextMenuStrip1
             // 
