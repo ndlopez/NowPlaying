@@ -84,12 +84,12 @@ namespace NowPlaying
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(15F, 37F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(533, 87);
+            this.ClientSize = new System.Drawing.Size(740, 87);
             this.Controls.Add(this.nowPlayingLabel);
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Now Playing";
+            this.Text = "Now Playing on FM La Paz";
             this.Move += new System.EventHandler(this.Form1_Move);
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);

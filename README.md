@@ -1,6 +1,6 @@
 ## Now Playing on FM La Paz (Windows version)
 
-![Notification](now_playing.png)
+![Notification](assets/now_playing.png)
 
 #installation process:
 
