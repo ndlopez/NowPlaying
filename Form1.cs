@@ -2,7 +2,7 @@
  * Display notification on the Windows tray
  * Now Playing on FM La Paz
  * Developer: ndzerglink (github.com/ndlopez)
- * Updated on 2021-09-11
+ * Project started on 2021-09-11
  * References:
  * [1] https://zetcode.com/csharp/json/
  * [2] https://youtu.be/-6bvqwVYwMY
@@ -27,6 +27,8 @@ namespace NowPlaying
         public Form1()
         {
             InitializeComponent();
+            //Call the Loader
+            NotifyLoader();
         }
 
 
@@ -40,25 +42,29 @@ namespace NowPlaying
             Application.Exit();
         }
 
-        private async void Form1_Move(object sender, EventArgs e)
+        private void Form1_Move(object sender, EventArgs e)
         {
             if (this.WindowState == FormWindowState.Minimized)
             {
                 this.Hide();
-                try
-                {
-                    var nowSong = await GetDataAsync();
-                    int myUpdate = 280000; //ms
-                    //Console.WriteLine(nowSong);
-                    notifyIcon1.ShowBalloonTip(myUpdate, DateTime.Now.ToString("HH:mm") + " Now on FM La Paz", nowSong.ToString(), ToolTipIcon.Info);
-                    nowPlayingLabel.Text = DateTime.Now.ToString("HH:mm  ") + nowSong.ToString();
-                }
-                catch (Exception)
-                {
-                    notifyIcon1.ShowBalloonTip(5000, "Async connection error","Error",ToolTipIcon.Error);
-                    Console.WriteLine("Async connection error"); 
-                }
-                
+            }
+        }
+
+        private async void NotifyLoader()
+        {
+            try
+            {
+                var nowSong = await GetDataAsync();
+                int myUpdate = 30000; //ms
+                //Console.WriteLine(nowSong);
+                notifyIcon1.ShowBalloonTip(myUpdate, DateTime.Now.ToString("HH:mm") + " Now on FM La Paz", nowSong.ToString(), ToolTipIcon.Info);
+                nowPlayingLabel.Text = DateTime.Now.ToString("HH:mm  ") + nowSong.ToString();
+                notifyIcon1.Text = "Now Playing: " + nowSong.ToString();
+            }
+            catch (Exception)
+            {
+                notifyIcon1.ShowBalloonTip(5000, "Async connection error", "Error", ToolTipIcon.Error);
+                Console.WriteLine("Async connection error");
             }
         }
 
