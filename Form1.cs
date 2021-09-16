@@ -27,8 +27,9 @@ namespace NowPlaying
         public Form1()
         {
             InitializeComponent();
+
             //Call the Loader
-            NotifyLoader();
+            //NotifyLoader();
         }
 
 
@@ -47,6 +48,8 @@ namespace NowPlaying
             if (this.WindowState == FormWindowState.Minimized)
             {
                 this.Hide();
+                //Task.Delay(new TimeSpan(0, 0, 30)).ContinueWith(o => { NotifyLoader(); });
+                NotifyLoader();
             }
         }
 
@@ -55,16 +58,17 @@ namespace NowPlaying
             try
             {
                 var nowSong = await GetDataAsync();
-                int myUpdate = 30000; //ms
+                int myUpdate = 5000; //duration time in ms
+                var myTime =DateTime.Now.ToString("HH:mm  ");
                 //Console.WriteLine(nowSong);
                 notifyIcon1.ShowBalloonTip(myUpdate, DateTime.Now.ToString("HH:mm") + " Now on FM La Paz", nowSong.ToString(), ToolTipIcon.Info);
-                nowPlayingLabel.Text = DateTime.Now.ToString("HH:mm  ") + nowSong.ToString();
-                notifyIcon1.Text = "Now Playing: " + nowSong.ToString();
+                nowPlayingLabel.Text = myTime + nowSong.ToString();
+                notifyIcon1.Text = myTime + "Now: " + nowSong.ToString();
             }
             catch (Exception)
             {
                 notifyIcon1.ShowBalloonTip(5000, "Async connection error", "Error", ToolTipIcon.Error);
-                Console.WriteLine("Async connection error");
+                //Console.WriteLine("Async connection error");
             }
         }
 
