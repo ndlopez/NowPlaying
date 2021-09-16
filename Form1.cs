@@ -53,7 +53,11 @@ namespace NowPlaying
                     notifyIcon1.ShowBalloonTip(myUpdate, DateTime.Now.ToString("HH:mm") + " Now on FM La Paz", nowSong.ToString(), ToolTipIcon.Info);
                     nowPlayingLabel.Text = DateTime.Now.ToString("HH:mm  ") + nowSong.ToString();
                 }
-                catch (Exception){ Console.WriteLine("Async connection error"); }
+                catch (Exception)
+                {
+                    notifyIcon1.ShowBalloonTip(5000, "Async connection error","Error",ToolTipIcon.Error);
+                    Console.WriteLine("Async connection error"); 
+                }
                 
             }
         }
