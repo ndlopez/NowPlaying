@@ -105,5 +105,10 @@ namespace NowPlaying
             }
             return currSong;
         }
+
+        private void updateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            NotifyLoader();
+        }
     }
 }
