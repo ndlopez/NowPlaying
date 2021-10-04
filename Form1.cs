@@ -18,12 +18,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Http;
 using System.Text.Json;
+using System.Timers;
 using System.Windows.Forms;
 
 namespace NowPlaying
 {
     public partial class Form1 : Form
     {
+        static System.Timers.Timer songTimer;
         public Form1()
         {
             InitializeComponent();
@@ -108,7 +110,32 @@ namespace NowPlaying
         {
             NotifyLoader();
         }
-                
+
+        private void schedule_Timer()
+        {
+            Console.WriteLine("### Timer Started ###");
+
+            DateTime nowTime = DateTime.Now;
+            DateTime scheduledTime = new DateTime(nowTime.Year, nowTime.Month, nowTime.Day, nowTime.Hour, nowTime.Minute, 0, 0); //Specify your scheduled time HH,MM,SS [8am and 42 minutes]
+            if (nowTime > scheduledTime)
+            {
+                scheduledTime = scheduledTime.AddMinutes(1);
+                //scheduledTime = scheduledTime.AddDays(1);
+            }
+
+            double tickTime = (double)(scheduledTime - DateTime.Now).TotalMilliseconds;
+            songTimer = new System.Timers.Timer(tickTime);
+            songTimer.Elapsed += new ElapsedEventHandler(timer_Elapsed);
+            songTimer.Start();
+        }
+
+        private void timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            Console.WriteLine("### Timer Stopped ### \n");
+            NotifyLoader();
+            songTimer.Stop();
+            schedule_Timer();
+        }
     }
         
 }
