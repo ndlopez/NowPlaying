@@ -2,23 +2,32 @@
 
 ![Notification](assets/now_playing.png)
 
-#Installation:
+### Installation:
 
-Release version is not yet available. Lots of testing before deploying :(
+**Pre-Release** version is available as a zip file. Please download it and expand it 
+to any folder and execute the file *NowPlaying.exe*. 
 
-If you by any chance have VS installed on your PC (~8GB) then download this folder
-as ZIP and expand it on any folder (~/source/repos/) and open the project file 
+A warning will pop up, just click OK to continue.
+
+> This application does NOT collect any sort of data. It requires an Internet connection to
+update the song.
+
+
+~If you by any chance have VS installed on your PC (8GB) then download this folder
+as ZIP and expand it on any folder (C:\/user/source/repos/) and open the project file 
 <NowPlaying.csproj>. 
 
-#Known issues:
+### Known issues:
 
-1. The application will run as soon as is minimized
-it will show at the System Tray the current song playing on https://www.lapaz.fm .
+1. The application will run as soon as is minimized. It will show at the System Tray 
+the current song playing on [FM La Paz](https://www.lapaz.fm).
 2. It should update after 4minutes, however due to a problem with an async function
-it does not update. To update click on the icon (headphones) select <Show> option
-to display the app and minimized again.
+it does not update.
 
-#Acknowledgments:
+To update right-click on the icon (headphones) select <Update> option. 
+It is also possible to update by selecting <Show> to display the app and then minimize again.
+
+### Acknowledgments:
 
 Thanks to all the following references, 
 it took me about 4hours to develop this application.
@@ -33,10 +42,10 @@ it took me about 4hours to develop this application.
 
 5. The application icon is from [here](https://icon-icons.com/)
 
-#Running Environment:
+### Running Environment:
 
 - Programming language: C#
 
-- Editor: VS Code
+- Editor: VS Code 2019 Community Edition.
 
 - Environment: Panasonic Let's Note/ Windows10 Pro

@@ -27,9 +27,7 @@ namespace NowPlaying
         public Form1()
         {
             InitializeComponent();
-
-            //Call the Loader
-            //NotifyLoader();
+                        
         }
 
 
@@ -110,5 +108,7 @@ namespace NowPlaying
         {
             NotifyLoader();
         }
+                
     }
+        
 }
