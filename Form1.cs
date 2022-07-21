@@ -9,17 +9,12 @@
  * [3] https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/async
 */
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Net.Http;
 using System.Text.Json;
+using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace NowPlaying
 {
@@ -29,7 +24,7 @@ namespace NowPlaying
         public Form1()
         {
             InitializeComponent();
-                        
+
         }
 
 
@@ -50,6 +45,7 @@ namespace NowPlaying
                 this.Hide();
                 //Task.Delay(new TimeSpan(0, 0, 30)).ContinueWith(o => { NotifyLoader(); });
                 NotifyLoader();
+                GetImgAsync();
             }
         }
 
@@ -59,11 +55,18 @@ namespace NowPlaying
             {
                 var nowSong = await GetDataAsync();
                 int myUpdate = 5000; //duration time in ms
-                var myTime =DateTime.Now.ToString("HH:mm  ");
+                var myTime = DateTime.Now.ToString("HH:mm  ");
                 //Console.WriteLine(nowSong);
                 notifyIcon1.ShowBalloonTip(myUpdate, DateTime.Now.ToString("HH:mm") + " Now on FM La Paz", nowSong.ToString(), ToolTipIcon.Info);
-                nowPlayingLabel.Text = myTime + nowSong.ToString();
+                var auxVar = nowSong.ToString().Split("-");
+
+                nowArtist.Text = myTime + "\n" + auxVar[1].Trim();
+                nowPlayingLabel.Text = auxVar[0];//GetImgAsync(); //
+
                 notifyIcon1.Text = myTime + "Now: " + nowSong.ToString();
+                
+                nowArtwork.ImageLocation = "https://lastfm.freetls.fastly.net/i/u/174s/c1322f3a5c3fcf4810078a14c4caae11.png";
+
             }
             catch (Exception)
             {
@@ -86,6 +89,8 @@ namespace NowPlaying
             var root = releasesResponse.RootElement.GetProperty("data");
             var elems = root.EnumerateArray();
             string currSong = "";
+            //string currArtist = "";
+            //string[] datos= {"",""}; //=new String[2];
 
             while (elems.MoveNext())
             {
@@ -99,11 +104,39 @@ namespace NowPlaying
                     {
                         currSong = prop.Value.ToString();
                     }
-
                 }
 
             }
             return currSong;
+        }
+
+        private String GetImgAsync()
+        {
+            //var httpClient = new HttpClient();
+            String xmlString = "https://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=your_key&artist=lorde&track=solar%20power";
+            XmlDocument artistDoc = new XmlDocument();
+            artistDoc.Load(xmlString);
+            //XmlNode node = artistDoc.DocumentElement.SelectSingleNode("track/album/image");
+            //string text = node.InnerText;//Works fine if node has no attrib
+            XmlNodeList allImg = artistDoc.GetElementsByTagName("track/album/image.size");
+            string text = "";
+            foreach(XmlElement imgSize in allImg)
+            {
+                foreach (XmlElement imgs in imgSize.ChildNodes)
+                {
+
+                    if (imgs.InnerText != null)
+                    {
+                        text = imgs.InnerText;
+                    }
+                    else
+                    {
+                        text = "Sorry, no such thing";
+                    }
+                }
+            }
+            
+            return text;
         }
 
         private void updateToolStripMenuItem_Click(object sender, EventArgs e)
@@ -136,6 +169,7 @@ namespace NowPlaying
             songTimer.Stop();
             schedule_Timer();
         }
+
     }
-        
+
 }

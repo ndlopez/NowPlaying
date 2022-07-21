@@ -37,18 +37,21 @@ namespace NowPlaying
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.nowArtwork = new System.Windows.Forms.PictureBox();
+            this.nowArtist = new System.Windows.Forms.Label();
             this.contextMenuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nowArtwork)).BeginInit();
             this.SuspendLayout();
             // 
             // nowPlayingLabel
             // 
             this.nowPlayingLabel.AutoSize = true;
             this.nowPlayingLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.nowPlayingLabel.Location = new System.Drawing.Point(21, 18);
+            this.nowPlayingLabel.Location = new System.Drawing.Point(15, 150);
             this.nowPlayingLabel.Name = "nowPlayingLabel";
-            this.nowPlayingLabel.Size = new System.Drawing.Size(313, 48);
+            this.nowPlayingLabel.Size = new System.Drawing.Size(172, 48);
             this.nowPlayingLabel.TabIndex = 0;
-            this.nowPlayingLabel.Text = "Now on FM La Paz";
+            this.nowPlayingLabel.Text = "Now Title";
             // 
             // contextMenuStrip1
             // 
@@ -89,11 +92,33 @@ namespace NowPlaying
             this.notifyIcon1.Visible = true;
             this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
             // 
+            // nowArtwork
+            // 
+            this.nowArtwork.Location = new System.Drawing.Point(580, 40);
+            this.nowArtwork.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.nowArtwork.Name = "nowArtwork";
+            this.nowArtwork.Size = new System.Drawing.Size(174, 174);
+            this.nowArtwork.TabIndex = 1;
+            this.nowArtwork.TabStop = false;
+            // 
+            // nowArtist
+            // 
+            this.nowArtist.AutoSize = true;
+            this.nowArtist.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.nowArtist.Location = new System.Drawing.Point(15, 30);
+            this.nowArtist.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.nowArtist.Name = "nowArtist";
+            this.nowArtist.Size = new System.Drawing.Size(188, 48);
+            this.nowArtist.TabIndex = 2;
+            this.nowArtist.Text = "Now Artist";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(15F, 37F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(740, 87);
+            this.ClientSize = new System.Drawing.Size(777, 241);
+            this.Controls.Add(this.nowArtist);
+            this.Controls.Add(this.nowArtwork);
             this.Controls.Add(this.nowPlayingLabel);
             this.MaximizeBox = false;
             this.Name = "Form1";
@@ -101,6 +126,7 @@ namespace NowPlaying
             this.Text = "Now Playing on FM La Paz";
             this.Move += new System.EventHandler(this.Form1_Move);
             this.contextMenuStrip1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.nowArtwork)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -114,7 +140,8 @@ namespace NowPlaying
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
         private System.Windows.Forms.ToolStripMenuItem updateToolStripMenuItem;
-        
+        private System.Windows.Forms.PictureBox nowArtwork;
+        private System.Windows.Forms.Label nowArtist;
     }
 }
 
