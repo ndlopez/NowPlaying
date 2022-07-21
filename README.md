@@ -4,8 +4,9 @@
 
 ### Installation:
 
-**Pre-Release** version is available as a zip file. Please download it and expand it 
-to any folder and execute the file *NowPlaying.exe*. 
+**Pre-Release** version is available [here](https://github.com/ndlopez/NowPlaying/raw/master/pre-release.zip). Please download it and expand it to any folder and execute the file *NowPlaying.exe*. 
+
+(Requires Windows Desktop Runtime v5.0, apparently supported on Windows7)
 
 A warning will pop up, just click OK to continue.
 
@@ -26,6 +27,12 @@ it does not update.
 
 To update right-click on the icon (headphones) select <Update> option. 
 It is also possible to update by selecting <Show> to display the app and then minimize again.
+
+3. VS Community Ed. no longer supports Framework NET 5.0, therefore, the following files should be updated to a long-term version:
+
+	- NowPlaying.cs: 5 netcoreapp3.1
+	- obj/NowPlaying.csproj.nuget.dgspec.json, change all NET 5.0 to netcoreapp3.1
+	- obj/project.assets.json, change all NET 5.0 to netcoreapp3.1
 
 ### Acknowledgments:
 
