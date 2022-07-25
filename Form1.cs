@@ -45,7 +45,6 @@ namespace NowPlaying
                 this.Hide();
                 //Task.Delay(new TimeSpan(0, 0, 30)).ContinueWith(o => { NotifyLoader(); });
                 NotifyLoader();
-                GetImgAsync();
             }
         }
 
@@ -61,7 +60,7 @@ namespace NowPlaying
                 var auxVar = nowSong.ToString().Split("-");
 
                 nowArtist.Text = myTime + "\n" + auxVar[1].Trim();
-                nowPlayingLabel.Text = auxVar[0];//GetImgAsync(); //
+                nowPlayingLabel.Text = GetImgPath(nowSong.ToString()); //auxVar[0];//GetImgAsync(); //
 
                 notifyIcon1.Text = myTime + "Now: " + nowSong.ToString();
                 
@@ -82,9 +81,10 @@ namespace NowPlaying
 
         public async Task<string> GetDataAsync()
         {
+            string fmLaPazURL = "https://icecasthd.net:2199/rpc/lapazfm/streaminfo.get";
             var httpClient = new HttpClient();
             var releasesResponse = await JsonDocument.ParseAsync(await httpClient.GetStreamAsync(
-                "https://icecasthd.net:2199/rpc/lapazfm/streaminfo.get"));
+                fmLaPazURL));
 
             var root = releasesResponse.RootElement.GetProperty("data");
             var elems = root.EnumerateArray();
@@ -110,11 +110,16 @@ namespace NowPlaying
             return currSong;
         }
 
-        private String GetImgAsync()
+        private String GetImgPath(string currentSong)
         {
             //var httpClient = new HttpClient();
             string apiKey = "";
-            String xmlString = "https://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key="+apiKey+"&artist=lorde&track=solar%20power";
+            //currentSong = await GetDataAsync();
+            var auxVar = currentSong.Split("-");
+            string thisArtist = auxVar[1].Trim();
+            string thisSong = auxVar[0];
+            String xmlString = "https://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=" +
+                apiKey + "&artist=" + thisArtist + "&track=" + thisSong; //+"solar%20power";
             string text = "";
 
             try {
@@ -128,7 +133,6 @@ namespace NowPlaying
                 {
                     foreach (XmlElement imgs in imgSize.ChildNodes)
                     {
-
                         if (imgs.InnerText != null)
                         {
                             text = imgs.InnerText;
