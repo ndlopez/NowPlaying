@@ -113,27 +113,36 @@ namespace NowPlaying
         private String GetImgAsync()
         {
             //var httpClient = new HttpClient();
-            String xmlString = "https://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=your_key&artist=lorde&track=solar%20power";
-            XmlDocument artistDoc = new XmlDocument();
-            artistDoc.Load(xmlString);
-            //XmlNode node = artistDoc.DocumentElement.SelectSingleNode("track/album/image");
-            //string text = node.InnerText;//Works fine if node has no attrib
-            XmlNodeList allImg = artistDoc.GetElementsByTagName("track/album/image.size");
+            string apiKey = "";
+            String xmlString = "https://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key="+apiKey+"&artist=lorde&track=solar%20power";
             string text = "";
-            foreach(XmlElement imgSize in allImg)
-            {
-                foreach (XmlElement imgs in imgSize.ChildNodes)
-                {
 
-                    if (imgs.InnerText != null)
+            try {
+
+                XmlDocument artistDoc = new XmlDocument();
+                artistDoc.Load(xmlString);
+                //XmlNode node = artistDoc.DocumentElement.SelectSingleNode("track/album/image");
+                //string text = node.InnerText;//Works fine if node has no attrib
+                XmlNodeList allImg = artistDoc.GetElementsByTagName("track/album/image.size");
+                foreach (XmlElement imgSize in allImg)
+                {
+                    foreach (XmlElement imgs in imgSize.ChildNodes)
                     {
-                        text = imgs.InnerText;
-                    }
-                    else
-                    {
-                        text = "Sorry, no such thing";
+
+                        if (imgs.InnerText != null)
+                        {
+                            text = imgs.InnerText;
+                        }
+                        else
+                        {
+                            text = "Sorry, no such thing";
+                        }
                     }
                 }
+            }
+            catch
+            {
+                text = "No internet connection or path error";
             }
             
             return text;
