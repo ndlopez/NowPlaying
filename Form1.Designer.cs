@@ -47,7 +47,7 @@ namespace NowPlaying
             // 
             this.nowPlayingLabel.AutoSize = true;
             this.nowPlayingLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.nowPlayingLabel.Location = new System.Drawing.Point(15, 150);
+            this.nowPlayingLabel.Location = new System.Drawing.Point(250, 150);
             this.nowPlayingLabel.Name = "nowPlayingLabel";
             this.nowPlayingLabel.Size = new System.Drawing.Size(172, 48);
             this.nowPlayingLabel.TabIndex = 0;
@@ -94,8 +94,8 @@ namespace NowPlaying
             // 
             // nowArtwork
             // 
-            this.nowArtwork.Location = new System.Drawing.Point(580, 40);
-            this.nowArtwork.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.nowArtwork.Location = new System.Drawing.Point(30, 40);
+            this.nowArtwork.Margin = new System.Windows.Forms.Padding(4);
             this.nowArtwork.Name = "nowArtwork";
             this.nowArtwork.Size = new System.Drawing.Size(174, 174);
             this.nowArtwork.TabIndex = 1;
@@ -105,7 +105,7 @@ namespace NowPlaying
             // 
             this.nowArtist.AutoSize = true;
             this.nowArtist.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.nowArtist.Location = new System.Drawing.Point(15, 30);
+            this.nowArtist.Location = new System.Drawing.Point(250, 40);
             this.nowArtist.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.nowArtist.Name = "nowArtist";
             this.nowArtist.Size = new System.Drawing.Size(188, 48);
