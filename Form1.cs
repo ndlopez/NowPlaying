@@ -130,6 +130,15 @@ namespace NowPlaying
                 XmlNode node = artistDoc.DocumentElement.SelectSingleNode("track/album/title");
                 text = (node.InnerText != null) ? node.InnerText:""; //Works fine if node has no attrib
 
+                var q = from myNode in artistDoc.Descendants("track/album/image")
+                        let name = node.Attribute("PatientName")
+                        let length = node.Attribute("PatentFieldLength")
+                        select new { Name = (name != null) ? name.Value : "", Length = (length != null && Int32.TryParse(length.Value, out i)) ? i : 0 };
+
+                foreach (var node in q)
+                {
+                    Console.WriteLine("Name={0}, Length={1}", node.Name, node.Length);
+                }
                 /* Imgs List
                 XmlNodeList allImg = artistDoc.GetElementsByTagName("track/album/image.size");
                 foreach (XmlElement imgSize in allImg)
