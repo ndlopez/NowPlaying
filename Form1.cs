@@ -126,12 +126,12 @@ namespace NowPlaying
             try {
                 XmlDocument artistDoc = new XmlDocument();
                 artistDoc.Load(xmlString);
+                // Album title from XML
                 XmlNode node = artistDoc.DocumentElement.SelectSingleNode("track/album/title");
-                if (node.InnerText != null)
-                {
-                    text = node.InnerText;
-                }//Works fine if node has no attrib
-                /*XmlNodeList allImg = artistDoc.GetElementsByTagName("track/album/image.size");
+                text = (node.InnerText != null) ? node.InnerText:""; //Works fine if node has no attrib
+
+                /* Imgs List
+                XmlNodeList allImg = artistDoc.GetElementsByTagName("track/album/image.size");
                 foreach (XmlElement imgSize in allImg)
                 {
                     foreach (XmlElement imgs in imgSize.ChildNodes)
