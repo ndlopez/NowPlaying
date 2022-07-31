@@ -60,10 +60,10 @@ namespace NowPlaying
                 var auxVar = nowSong.ToString().Split("-");
 
                 nowArtist.Text = myTime + "\n" + auxVar[1].Trim();
-                nowPlayingLabel.Text = GetImgPath(nowSong.ToString()); //auxVar[0];//GetImgAsync(); //
+                nowPlayingLabel.Text = auxVar[0];//GetImgAsync(); //
 
                 notifyIcon1.Text = myTime + "Now: " + nowSong.ToString();
-                
+                nowPlayingAlbum.Text = GetImgPath(nowSong.ToString());
                 nowArtwork.ImageLocation = "https://lastfm.freetls.fastly.net/i/u/174s/c1322f3a5c3fcf4810078a14c4caae11.png";
 
             }
@@ -121,14 +121,17 @@ namespace NowPlaying
             String xmlString = "https://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=" +
                 apiKey + "&artist=" + thisArtist + "&track=" + thisSong; //+"solar%20power";
             string text = "";
+            Console.WriteLine("thisString: " + xmlString);
 
             try {
-
                 XmlDocument artistDoc = new XmlDocument();
                 artistDoc.Load(xmlString);
-                //XmlNode node = artistDoc.DocumentElement.SelectSingleNode("track/album/image");
-                //string text = node.InnerText;//Works fine if node has no attrib
-                XmlNodeList allImg = artistDoc.GetElementsByTagName("track/album/image.size");
+                XmlNode node = artistDoc.DocumentElement.SelectSingleNode("track/album/title");
+                if (node.InnerText != null)
+                {
+                    text = node.InnerText;
+                }//Works fine if node has no attrib
+                /*XmlNodeList allImg = artistDoc.GetElementsByTagName("track/album/image.size");
                 foreach (XmlElement imgSize in allImg)
                 {
                     foreach (XmlElement imgs in imgSize.ChildNodes)
@@ -142,7 +145,7 @@ namespace NowPlaying
                             text = "Sorry, no such thing";
                         }
                     }
-                }
+                }*/
             }
             catch
             {

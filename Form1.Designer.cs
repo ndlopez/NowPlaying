@@ -39,6 +39,7 @@ namespace NowPlaying
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.nowArtwork = new System.Windows.Forms.PictureBox();
             this.nowArtist = new System.Windows.Forms.Label();
+            this.nowPlayingAlbum = new System.Windows.Forms.Label();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nowArtwork)).BeginInit();
             this.SuspendLayout();
@@ -47,7 +48,7 @@ namespace NowPlaying
             // 
             this.nowPlayingLabel.AutoSize = true;
             this.nowPlayingLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.nowPlayingLabel.Location = new System.Drawing.Point(250, 150);
+            this.nowPlayingLabel.Location = new System.Drawing.Point(250, 140);
             this.nowPlayingLabel.Name = "nowPlayingLabel";
             this.nowPlayingLabel.Size = new System.Drawing.Size(172, 48);
             this.nowPlayingLabel.TabIndex = 0;
@@ -112,11 +113,21 @@ namespace NowPlaying
             this.nowArtist.TabIndex = 2;
             this.nowArtist.Text = "Now Artist";
             // 
+            // nowPlayingAlbum
+            // 
+            this.nowPlayingAlbum.AutoSize = true;
+            this.nowPlayingAlbum.Location = new System.Drawing.Point(259, 198);
+            this.nowPlayingAlbum.Name = "nowPlayingAlbum";
+            this.nowPlayingAlbum.Size = new System.Drawing.Size(90, 37);
+            this.nowPlayingAlbum.TabIndex = 3;
+            this.nowPlayingAlbum.Text = "label1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(15F, 37F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(777, 241);
+            this.Controls.Add(this.nowPlayingAlbum);
             this.Controls.Add(this.nowArtist);
             this.Controls.Add(this.nowArtwork);
             this.Controls.Add(this.nowPlayingLabel);
@@ -142,6 +153,7 @@ namespace NowPlaying
         private System.Windows.Forms.ToolStripMenuItem updateToolStripMenuItem;
         private System.Windows.Forms.PictureBox nowArtwork;
         private System.Windows.Forms.Label nowArtist;
+        private System.Windows.Forms.Label nowPlayingAlbum;
     }
 }
 
