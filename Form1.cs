@@ -126,15 +126,15 @@ namespace NowPlaying
 
             try {
                 //XmlDocument artistDoc = new XmlDocument();artistDoc.Load(xmlString);
-                var artistDoc = XmlElement.Parse(xmlString);
+                
                 
                 // Album title from XML
-                XmlNode node = artistDoc.DocumentElement.SelectSingleNode("track/album/title");
-                text = (node.InnerText != null) ? node.InnerText:""; //Works fine if node has no attrib
-
-                var q = from myNode in artistDoc.Descendants("track/album/image")
-                        let name = node.Attribute("PatientName")
-                        let length = node.Attribute("PatentFieldLength")
+                //XmlNode node = artistDoc.DocumentElement.SelectSingleNode("track/album/title");
+                //text = (node.InnerText != null) ? node.InnerText:""; //Works fine if node has no attrib
+                var artistDoc = XElement.Parse(xmlString);
+                var q = from node in artistDoc.Descendants("track")
+                        let name = node.Attribute("album")
+                        let length = node.Attribute("title")
                         select new { Name = (name != null) ? name.Value : "", Length = (length != null && Int32.TryParse(length.Value, out i)) ? i : 0 };
 
                 foreach (var node in q)
