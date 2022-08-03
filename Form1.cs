@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Forms;
 using System.Xml;
+using System.Xml.Linq;
 
 namespace NowPlaying
 {
@@ -124,8 +125,9 @@ namespace NowPlaying
             Console.WriteLine("thisString: " + xmlString);
 
             try {
-                XmlDocument artistDoc = new XmlDocument();
-                artistDoc.Load(xmlString);
+                //XmlDocument artistDoc = new XmlDocument();artistDoc.Load(xmlString);
+                var artistDoc = XmlElement.Parse(xmlString);
+                
                 // Album title from XML
                 XmlNode node = artistDoc.DocumentElement.SelectSingleNode("track/album/title");
                 text = (node.InnerText != null) ? node.InnerText:""; //Works fine if node has no attrib
