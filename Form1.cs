@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Forms;
 using System.Xml;
+using System.Linq;
 using System.Xml.Linq;
 
 namespace NowPlaying
@@ -70,7 +71,7 @@ namespace NowPlaying
             }
             catch (Exception)
             {
-                notifyIcon1.ShowBalloonTip(5000, "Async connection error", "Error", ToolTipIcon.Error);
+                notifyIcon1.ShowBalloonTip(5000, "Cannot connect to URL", "Error", ToolTipIcon.Error);
                 //Console.WriteLine("Async connection error");
             }
         }
@@ -91,7 +92,7 @@ namespace NowPlaying
             var elems = root.EnumerateArray();
             string currSong = "";
             //string currArtist = "";
-            //string[] datos= {"",""}; //=new String[2];
+            //string[] dat= {"",""}; //=new String[2];
 
             while (elems.MoveNext())
             {
@@ -125,13 +126,12 @@ namespace NowPlaying
             Console.WriteLine("thisString: " + xmlString);
 
             try {
-                //XmlDocument artistDoc = new XmlDocument();artistDoc.Load(xmlString);
-                
-                
+                //XmlDocument artistDoc = new XmlDocument();artistDoc.Load(xmlString);                
                 // Album title from XML
                 //XmlNode node = artistDoc.DocumentElement.SelectSingleNode("track/album/title");
                 //text = (node.InnerText != null) ? node.InnerText:""; //Works fine if node has no attrib
                 var artistDoc = XElement.Parse(xmlString);
+                int i;
                 var q = from node in artistDoc.Descendants("track")
                         let name = node.Attribute("album")
                         let length = node.Attribute("title")
@@ -147,14 +147,7 @@ namespace NowPlaying
                 {
                     foreach (XmlElement imgs in imgSize.ChildNodes)
                     {
-                        if (imgs.InnerText != null)
-                        {
-                            text = imgs.InnerText;
-                        }
-                        else
-                        {
-                            text = "Sorry, no such thing";
-                        }
+                        text = (imgs.InnerText != null)? imgs.InnerText : "Sorry, no such thing";
                     }
                 }*/
             }
