@@ -54,20 +54,20 @@ namespace NowPlaying
             try
             {
                 var nowSong = await GetDataAsync();
-                int myUpdate = 5000; //duration time in ms
+                int myUpdate = 3000; //duration time in ms
                 var myTime = DateTime.Now.ToString("HH:mm  ");
                 string thisStation = "Third Rock";
+                var auxVar = nowSong.ToString().Split("-");
                 //Console.WriteLine(nowSong);
                 notifyIcon1.ShowBalloonTip(myUpdate, DateTime.Now.ToString("HH:mm") + " Now on " + thisStation, nowSong.ToString(), ToolTipIcon.Info);
-                var auxVar = nowSong.ToString().Split("-");
-
+                
                 nowArtist.Text = myTime + "\n" + auxVar[1].Trim();
                 nowPlayingLabel.Text = auxVar[0];//GetImgAsync(); //
 
                 notifyIcon1.Text = myTime + "Now: " + nowSong.ToString();
                 nowPlayingAlbum.Text = GetImgPath(nowSong.ToString());
-                nowArtwork.ImageLocation = "https://lastfm.freetls.fastly.net/i/u/174s/c1322f3a5c3fcf4810078a14c4caae11.png";
-
+                //nowArtwork.ImageLocation = "https://lastfm.freetls.fastly.net/i/u/174s/c1322f3a5c3fcf4810078a14c4caae11.png";
+                nowArtwork.ImageLocation = GetImgPath(nowSong.ToString());
             }
             catch (Exception)
             {
@@ -128,13 +128,12 @@ namespace NowPlaying
         {
             string apiKey = "";
             var auxVar = currentSong.Split("-");
-            string thisArtist = auxVar[1].Trim();
-            string thisSong = auxVar[0];
-            //String xmlString = "https://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=" +
-            //    apiKey + "&artist=" + thisArtist + "&track=" + thisSong; //+"solar%20power";
-            String xmlString = "https://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=16fe44aaa6f35d5755a08eb62f371994&artist=BeeGees&track=Melody%20Fair";
+            string thisArtist = auxVar[0].Trim();
+            string thisSong = auxVar[1].Trim();
+            string xmlString = "https://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=" +
+                apiKey + "&artist=" + thisArtist + "&track=" + thisSong; //+"solar%20power";
             string text = "";
-
+            //return xmlString; To test if sth was returned.
             try {
                 /*XmlDocument artistDoc = new XmlDocument();artistDoc.Load(xmlString);                
                 // Album title from XML
@@ -151,16 +150,19 @@ namespace NowPlaying
                 }*/
                 XmlDocument doc = new XmlDocument();
                 doc.Load(xmlString);
-                XmlNode node = doc.SelectSingleNode("/track/");
-                foreach (XmlNode nodes in node.SelectNodes(
-                    "/album/image size"))
+                XmlNode node = doc.DocumentElement.SelectSingleNode("track/album");
+                int jdx = 0;
+                foreach (XmlNode nodes in node.SelectNodes("image"))
                 { 
-                    if (nodes != null)
+                    if (nodes.Attributes != null && nodes.HasChildNodes)
                     {
-                        text = node.Value;
+                        if (jdx==2)
+                            //jdx = 2 is img size 174x174
+                            text = nodes.FirstChild.Value;                        
                     }
+                    else { text = "No values here."; }
+                    jdx += 1;
                 }
-
             }
             catch
             {

@@ -1,8 +1,12 @@
-## Now Playing on FM La Paz (Windows version)
+## Now Playing on FM La Paz/ThirdRock (Windows version)
 
 ![Notification](assets/now_playing.png)
 
-This is currently one of the versions that still can get info from FM La Paz's website. The other is the MacOS version. Gnome can't connect to such site anymore. Probably due to a security certificate issue.
+This is currently one of the versions that still can get info from FM La Paz's website. The other is the MacOS version. Gnome can't connect to such URL anymore. Probably due to a security certificate issue.
+
+Sometimes FMLaPaz's is on *sleep mode*, so the URL that provides the JSON file with the current Playing song cannot be parsed. Thus, I added another station: *Third Rock* and another URL to search for the current song.
+
+As a bonus I added one extra feat. on the GUI. Download to figure out. 
 
 ### Installation:
 
