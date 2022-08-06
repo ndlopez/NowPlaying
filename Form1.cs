@@ -131,7 +131,7 @@ namespace NowPlaying
             string thisArtist = auxVar[0].Trim();
             string thisSong = auxVar[1].Trim();
             string xmlString = "https://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=" +
-                apiKey + "&artist=" + thisArtist + "&track=" + thisSong; //+"solar%20power";
+                apiKey + "&artist=" + thisArtist + "&track=" + thisSong;
             string text = "";
             //return xmlString; To test if sth was returned.
             try {

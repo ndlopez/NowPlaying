@@ -48,7 +48,7 @@ namespace NowPlaying
             // 
             this.nowPlayingLabel.AutoSize = true;
             this.nowPlayingLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.nowPlayingLabel.Location = new System.Drawing.Point(250, 140);
+            this.nowPlayingLabel.Location = new System.Drawing.Point(240, 130);
             this.nowPlayingLabel.Name = "nowPlayingLabel";
             this.nowPlayingLabel.Size = new System.Drawing.Size(172, 48);
             this.nowPlayingLabel.TabIndex = 0;
@@ -95,7 +95,7 @@ namespace NowPlaying
             // 
             // nowArtwork
             // 
-            this.nowArtwork.Location = new System.Drawing.Point(30, 40);
+            this.nowArtwork.Location = new System.Drawing.Point(40, 40);
             this.nowArtwork.Margin = new System.Windows.Forms.Padding(4);
             this.nowArtwork.Name = "nowArtwork";
             this.nowArtwork.Size = new System.Drawing.Size(174, 174);
@@ -106,7 +106,7 @@ namespace NowPlaying
             // 
             this.nowArtist.AutoSize = true;
             this.nowArtist.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.nowArtist.Location = new System.Drawing.Point(250, 40);
+            this.nowArtist.Location = new System.Drawing.Point(240, 35);
             this.nowArtist.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.nowArtist.Name = "nowArtist";
             this.nowArtist.Size = new System.Drawing.Size(188, 48);
@@ -116,7 +116,7 @@ namespace NowPlaying
             // nowPlayingAlbum
             // 
             this.nowPlayingAlbum.AutoSize = true;
-            this.nowPlayingAlbum.Location = new System.Drawing.Point(259, 198);
+            this.nowPlayingAlbum.Location = new System.Drawing.Point(240, 190);
             this.nowPlayingAlbum.Name = "nowPlayingAlbum";
             this.nowPlayingAlbum.Size = new System.Drawing.Size(90, 37);
             this.nowPlayingAlbum.TabIndex = 3;
