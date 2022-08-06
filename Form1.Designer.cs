@@ -134,7 +134,7 @@ namespace NowPlaying
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Now Playing on FM La Paz";
+            this.Text = "Now Playing on ThirdRock";
             this.Move += new System.EventHandler(this.Form1_Move);
             this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.nowArtwork)).EndInit();

@@ -15,8 +15,7 @@ using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Forms;
 using System.Xml;
-using System.Linq;
-using System.Xml.Linq;
+
 
 namespace NowPlaying
 {
@@ -57,8 +56,9 @@ namespace NowPlaying
                 var nowSong = await GetDataAsync();
                 int myUpdate = 5000; //duration time in ms
                 var myTime = DateTime.Now.ToString("HH:mm  ");
+                string thisStation = "Third Rock";
                 //Console.WriteLine(nowSong);
-                notifyIcon1.ShowBalloonTip(myUpdate, DateTime.Now.ToString("HH:mm") + " Now on FM La Paz", nowSong.ToString(), ToolTipIcon.Info);
+                notifyIcon1.ShowBalloonTip(myUpdate, DateTime.Now.ToString("HH:mm") + " Now on " + thisStation, nowSong.ToString(), ToolTipIcon.Info);
                 var auxVar = nowSong.ToString().Split("-");
 
                 nowArtist.Text = myTime + "\n" + auxVar[1].Trim();
@@ -72,7 +72,6 @@ namespace NowPlaying
             catch (Exception)
             {
                 notifyIcon1.ShowBalloonTip(5000, "Cannot connect to URL", "Error", ToolTipIcon.Error);
-                //Console.WriteLine("Async connection error");
             }
         }
 
@@ -84,11 +83,23 @@ namespace NowPlaying
         public async Task<string> GetDataAsync()
         {
             string fmLaPazURL = "https://icecasthd.net:2199/rpc/lapazfm/streaminfo.get";
+            string thirdRockURL = "https://feed.tunein.com/profiles/s151799/nowPlaying?token=eyJwIjpmYWxzZSwidCI6IjIwMjItMDgtMDZUMTM6NDg6NTIuMzY1MDAwNVoifQ&itemToken=BgUFAAEAAQABAAEAb28B91ACAAEFAAA&formats=mp3,aac,ogg,flash,html,hls,wma&serial=9275b839-1f68-4ff5-8c9b-18162687b82a&partnerId=RadioTime&version=5.1904&itemUrlScheme=secure&reqAttempt=1";
             var httpClient = new HttpClient();
             var releasesResponse = await JsonDocument.ParseAsync(await httpClient.GetStreamAsync(
-                fmLaPazURL));
+                thirdRockURL));
 
-            var root = releasesResponse.RootElement.GetProperty("data");
+            var root = releasesResponse.RootElement.GetProperty("Header");//data
+
+            var thirdElm = root.EnumerateObject();
+            while (thirdElm.MoveNext())
+            {
+                var myProp = thirdElm.Current;
+                if (myProp.Name == "Subtitle")
+                {
+                    return myProp.Value.ToString();
+                }
+            }
+
             var elems = root.EnumerateArray();
             string currSong = "";
             //string currArtist = "";
@@ -102,10 +113,11 @@ namespace NowPlaying
                 while (props.MoveNext())
                 {
                     var prop = props.Current;
-                    if (prop.Name == "song")
+                    if (prop.Name == "Subtitle")//song
                     {
                         currSong = prop.Value.ToString();
                     }
+                    else { currSong = "No song found"; }
                 }
 
             }
@@ -114,33 +126,20 @@ namespace NowPlaying
 
         private String GetImgPath(string currentSong)
         {
-            //var httpClient = new HttpClient();
             string apiKey = "";
-            //currentSong = await GetDataAsync();
             var auxVar = currentSong.Split("-");
             string thisArtist = auxVar[1].Trim();
             string thisSong = auxVar[0];
-            String xmlString = "https://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=" +
-                apiKey + "&artist=" + thisArtist + "&track=" + thisSong; //+"solar%20power";
+            //String xmlString = "https://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=" +
+            //    apiKey + "&artist=" + thisArtist + "&track=" + thisSong; //+"solar%20power";
+            String xmlString = "https://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=16fe44aaa6f35d5755a08eb62f371994&artist=BeeGees&track=Melody%20Fair";
             string text = "";
-            Console.WriteLine("thisString: " + xmlString);
 
             try {
-                //XmlDocument artistDoc = new XmlDocument();artistDoc.Load(xmlString);                
+                /*XmlDocument artistDoc = new XmlDocument();artistDoc.Load(xmlString);                
                 // Album title from XML
-                //XmlNode node = artistDoc.DocumentElement.SelectSingleNode("track/album/title");
-                //text = (node.InnerText != null) ? node.InnerText:""; //Works fine if node has no attrib
-                var artistDoc = XElement.Parse(xmlString);
-                int i;
-                var q = from node in artistDoc.Descendants("track")
-                        let name = node.Attribute("album")
-                        let length = node.Attribute("title")
-                        select new { Name = (name != null) ? name.Value : "", Length = (length != null && Int32.TryParse(length.Value, out i)) ? i : 0 };
-
-                foreach (var node in q)
-                {
-                    Console.WriteLine("Name={0}, Length={1}", node.Name, node.Length);
-                }
+                XmlNode node = artistDoc.DocumentElement.SelectSingleNode("track/album/title");
+                text = (node.InnerText != null) ? node.InnerText:""; //Works fine if node has no attrib*/
                 /* Imgs List
                 XmlNodeList allImg = artistDoc.GetElementsByTagName("track/album/image.size");
                 foreach (XmlElement imgSize in allImg)
@@ -150,6 +149,18 @@ namespace NowPlaying
                         text = (imgs.InnerText != null)? imgs.InnerText : "Sorry, no such thing";
                     }
                 }*/
+                XmlDocument doc = new XmlDocument();
+                doc.Load(xmlString);
+                XmlNode node = doc.SelectSingleNode("/track/");
+                foreach (XmlNode nodes in node.SelectNodes(
+                    "/album/image size"))
+                { 
+                    if (nodes != null)
+                    {
+                        text = node.Value;
+                    }
+                }
+
             }
             catch
             {
