@@ -22,6 +22,7 @@ namespace NowPlaying
     public partial class Form1 : Form
     {
         static System.Timers.Timer songTimer;
+        public string gotURL;
         public Form1()
         {
             InitializeComponent();
@@ -82,11 +83,12 @@ namespace NowPlaying
 
         public async Task<string> GetDataAsync()
         {
-            string fmLaPazURL = "https://icecasthd.net:2199/rpc/lapazfm/streaminfo.get";
-            string thirdRockURL = "https://feed.tunein.com/profiles/s151799/nowPlaying?token=eyJwIjpmYWxzZSwidCI6IjIwMjItMDgtMDZUMTM6NDg6NTIuMzY1MDAwNVoifQ&itemToken=BgUFAAEAAQABAAEAb28B91ACAAEFAAA&formats=mp3,aac,ogg,flash,html,hls,wma&serial=9275b839-1f68-4ff5-8c9b-18162687b82a&partnerId=RadioTime&version=5.1904&itemUrlScheme=secure&reqAttempt=1";
+            //string thirdRockURL = "https://feed.tunein.com/profiles/s151799/nowPlaying?token=eyJwIjpmYWxzZSwidCI6IjIwMjItMDgtMDZUMTM6NDg6NTIuMzY1MDAwNVoifQ&itemToken=BgUFAAEAAQABAAEAb28B91ACAAEFAAA&formats=mp3,aac,ogg,flash,html,hls,wma&serial=9275b839-1f68-4ff5-8c9b-18162687b82a&partnerId=RadioTime&version=5.1904&itemUrlScheme=secure&reqAttempt=1";
+            //gotURL = gotValue();
+
             var httpClient = new HttpClient();
             var releasesResponse = await JsonDocument.ParseAsync(await httpClient.GetStreamAsync(
-                thirdRockURL));
+                gotURL));
 
             var root = releasesResponse.RootElement.GetProperty("Header");//data
 
@@ -158,7 +160,7 @@ namespace NowPlaying
                     {
                         if (jdx==2)
                             //jdx = 2 is img size 174x174
-                            text = nodes.FirstChild.Value;                        
+                            text = nodes.FirstChild.Value;
                     }
                     else { text = "No values here."; }
                     jdx += 1;
@@ -203,6 +205,15 @@ namespace NowPlaying
             schedule_Timer();
         }
 
+        private void fMLaPazToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            gotURL = "https://icecasthd.net:2199/rpc/lapazfm/streaminfo.get";;
+        }
+
+        private void thirdRockToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            gotURL = "https://feed.tunein.com/profiles/s151799/nowPlaying?token=eyJwIjpmYWxzZSwidCI6IjIwMjItMDgtMDZUMTM6NDg6NTIuMzY1MDAwNVoifQ&itemToken=BgUFAAEAAQABAAEAb28B91ACAAEFAAA&formats=mp3,aac,ogg,flash,html,hls,wma&serial=9275b839-1f68-4ff5-8c9b-18162687b82a&partnerId=RadioTime&version=5.1904&itemUrlScheme=secure&reqAttempt=1";
+        }
     }
 
 }

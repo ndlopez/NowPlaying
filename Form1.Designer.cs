@@ -40,6 +40,9 @@ namespace NowPlaying
             this.nowArtwork = new System.Windows.Forms.PictureBox();
             this.nowArtist = new System.Windows.Forms.Label();
             this.nowPlayingAlbum = new System.Windows.Forms.Label();
+            this.stationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fMLaPazToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.thirdRockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nowArtwork)).BeginInit();
             this.SuspendLayout();
@@ -60,28 +63,29 @@ namespace NowPlaying
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.showToolStripMenuItem,
             this.exitToolStripMenuItem,
-            this.updateToolStripMenuItem});
+            this.updateToolStripMenuItem,
+            this.stationToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(183, 136);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(331, 230);
             // 
             // showToolStripMenuItem
             // 
             this.showToolStripMenuItem.Name = "showToolStripMenuItem";
-            this.showToolStripMenuItem.Size = new System.Drawing.Size(182, 44);
+            this.showToolStripMenuItem.Size = new System.Drawing.Size(330, 44);
             this.showToolStripMenuItem.Text = "Show";
             this.showToolStripMenuItem.Click += new System.EventHandler(this.showToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(182, 44);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(330, 44);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // updateToolStripMenuItem
             // 
             this.updateToolStripMenuItem.Name = "updateToolStripMenuItem";
-            this.updateToolStripMenuItem.Size = new System.Drawing.Size(182, 44);
+            this.updateToolStripMenuItem.Size = new System.Drawing.Size(330, 44);
             this.updateToolStripMenuItem.Text = "Update";
             this.updateToolStripMenuItem.Click += new System.EventHandler(this.updateToolStripMenuItem_Click);
             // 
@@ -122,6 +126,29 @@ namespace NowPlaying
             this.nowPlayingAlbum.TabIndex = 3;
             this.nowPlayingAlbum.Text = "label1";
             // 
+            // stationToolStripMenuItem
+            // 
+            this.stationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fMLaPazToolStripMenuItem,
+            this.thirdRockToolStripMenuItem});
+            this.stationToolStripMenuItem.Name = "stationToolStripMenuItem";
+            this.stationToolStripMenuItem.Size = new System.Drawing.Size(330, 44);
+            this.stationToolStripMenuItem.Text = "Station";
+            // 
+            // fMLaPazToolStripMenuItem
+            // 
+            this.fMLaPazToolStripMenuItem.Name = "fMLaPazToolStripMenuItem";
+            this.fMLaPazToolStripMenuItem.Size = new System.Drawing.Size(403, 48);
+            this.fMLaPazToolStripMenuItem.Text = "FM La Paz";
+            this.fMLaPazToolStripMenuItem.Click += new System.EventHandler(this.fMLaPazToolStripMenuItem_Click);
+            // 
+            // thirdRockToolStripMenuItem
+            // 
+            this.thirdRockToolStripMenuItem.Name = "thirdRockToolStripMenuItem";
+            this.thirdRockToolStripMenuItem.Size = new System.Drawing.Size(403, 48);
+            this.thirdRockToolStripMenuItem.Text = "Third Rock";
+            this.thirdRockToolStripMenuItem.Click += new System.EventHandler(this.thirdRockToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(15F, 37F);
@@ -154,6 +181,9 @@ namespace NowPlaying
         private System.Windows.Forms.PictureBox nowArtwork;
         private System.Windows.Forms.Label nowArtist;
         private System.Windows.Forms.Label nowPlayingAlbum;
+        private System.Windows.Forms.ToolStripMenuItem stationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem fMLaPazToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem thirdRockToolStripMenuItem;
     }
 }
 
