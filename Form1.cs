@@ -22,7 +22,7 @@ namespace NowPlaying
     public partial class Form1 : Form
     {
         static System.Timers.Timer songTimer;
-        public string gotURL;
+        public string gotStation;
         public Form1()
         {
             InitializeComponent();
@@ -67,8 +67,15 @@ namespace NowPlaying
 
                 notifyIcon1.Text = myTime + "Now: " + nowSong.ToString();
                 nowPlayingAlbum.Text = GetImgPath(nowSong.ToString());
-                //nowArtwork.ImageLocation = "https://lastfm.freetls.fastly.net/i/u/174s/c1322f3a5c3fcf4810078a14c4caae11.png";
-                nowArtwork.ImageLocation = GetImgPath(nowSong.ToString());
+
+                if (GetImgPath(nowSong.ToString()) != "0")
+                {
+                    nowArtwork.ImageLocation = GetImgPath(nowSong.ToString());
+                }
+                else
+                {
+                    nowArtwork.ImageLocation = "https://lastfm.freetls.fastly.net/i/u/174s/c1322f3a5c3fcf4810078a14c4caae11.png";
+                }
             }
             catch (Exception)
             {
@@ -83,46 +90,58 @@ namespace NowPlaying
 
         public async Task<string> GetDataAsync()
         {
-            //string thirdRockURL = "https://feed.tunein.com/profiles/s151799/nowPlaying?token=eyJwIjpmYWxzZSwidCI6IjIwMjItMDgtMDZUMTM6NDg6NTIuMzY1MDAwNVoifQ&itemToken=BgUFAAEAAQABAAEAb28B91ACAAEFAAA&formats=mp3,aac,ogg,flash,html,hls,wma&serial=9275b839-1f68-4ff5-8c9b-18162687b82a&partnerId=RadioTime&version=5.1904&itemUrlScheme=secure&reqAttempt=1";
-            //gotURL = gotValue();
+            //string thirdRockURL = this is default
+            string gotURL = "https://feed.tunein.com/profiles/s151799/nowPlaying?token=eyJwIjpmYWxzZSwidCI6IjIwMjItMDgtMDZUMTM6NDg6NTIuMzY1MDAwNVoifQ&itemToken=BgUFAAEAAQABAAEAb28B91ACAAEFAAA&formats=mp3,aac,ogg,flash,html,hls,wma&serial=9275b839-1f68-4ff5-8c9b-18162687b82a&partnerId=RadioTime&version=5.1904&itemUrlScheme=secure&reqAttempt=1";
+            string firstProp = "Header";
+            string currSong = "";
+
+            if (gotStation == "fmlapaz")
+            {
+                firstProp = "data";
+                gotURL = "https://icecasthd.net:2199/rpc/lapazfm/streaminfo.get";
+            }
 
             var httpClient = new HttpClient();
             var releasesResponse = await JsonDocument.ParseAsync(await httpClient.GetStreamAsync(
-                gotURL));
+                gotURL));            
 
-            var root = releasesResponse.RootElement.GetProperty("Header");//data
+            var root = releasesResponse.RootElement.GetProperty(firstProp);
 
+            if (gotStation == "fmlapaz") { 
+                var elems = root.EnumerateArray();
+                
+                //string currArtist = "";
+                //string[] dat= {"",""}; //=new String[2];
+
+                while (elems.MoveNext())
+                {
+                    var node = elems.Current;
+                    var props = node.EnumerateObject();
+
+                    while (props.MoveNext())
+                    {
+                        var prop = props.Current;
+                        if (prop.Name == "song")//song
+                        {
+                            currSong = prop.Value.ToString();
+                        }
+                        else { currSong = "No song found"; }
+                    }
+
+                }
+            
+            }
+            
             var thirdElm = root.EnumerateObject();
             while (thirdElm.MoveNext())
             {
                 var myProp = thirdElm.Current;
                 if (myProp.Name == "Subtitle")
                 {
-                    return myProp.Value.ToString();
+                    currSong = myProp.Value.ToString();
                 }
             }
-
-            var elems = root.EnumerateArray();
-            string currSong = "";
-            //string currArtist = "";
-            //string[] dat= {"",""}; //=new String[2];
-
-            while (elems.MoveNext())
-            {
-                var node = elems.Current;
-                var props = node.EnumerateObject();
-
-                while (props.MoveNext())
-                {
-                    var prop = props.Current;
-                    if (prop.Name == "Subtitle")//song
-                    {
-                        currSong = prop.Value.ToString();
-                    }
-                    else { currSong = "No song found"; }
-                }
-
-            }
+            
             return currSong;
         }
 
@@ -153,18 +172,22 @@ namespace NowPlaying
                 XmlDocument doc = new XmlDocument();
                 doc.Load(xmlString);
                 XmlNode node = doc.DocumentElement.SelectSingleNode("track/album");
-                int jdx = 0;
-                foreach (XmlNode nodes in node.SelectNodes("image"))
-                { 
-                    if (nodes.Attributes != null && nodes.HasChildNodes)
+                if (node != null)
+                {
+                    int jdx = 0;
+                    foreach (XmlNode nodes in node.SelectNodes("image"))
                     {
-                        if (jdx==2)
-                            //jdx = 2 is img size 174x174
-                            text = nodes.FirstChild.Value;
+                        if (nodes.Attributes != null && nodes.HasChildNodes)
+                        {
+                            if (jdx == 2)
+                                //jdx = 2 is img size 174x174
+                                text = nodes.FirstChild.Value;
+                        }
+                        else { text = "No values here."; }
+                        jdx += 1;
                     }
-                    else { text = "No values here."; }
-                    jdx += 1;
                 }
+                else { text = "0"; }
             }
             catch
             {
@@ -207,12 +230,14 @@ namespace NowPlaying
 
         private void fMLaPazToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            gotURL = "https://icecasthd.net:2199/rpc/lapazfm/streaminfo.get";;
+            //gotURL = "https://icecasthd.net:2199/rpc/lapazfm/streaminfo.get";
+            gotStation = "fmlapaz";
         }
 
         private void thirdRockToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            gotURL = "https://feed.tunein.com/profiles/s151799/nowPlaying?token=eyJwIjpmYWxzZSwidCI6IjIwMjItMDgtMDZUMTM6NDg6NTIuMzY1MDAwNVoifQ&itemToken=BgUFAAEAAQABAAEAb28B91ACAAEFAAA&formats=mp3,aac,ogg,flash,html,hls,wma&serial=9275b839-1f68-4ff5-8c9b-18162687b82a&partnerId=RadioTime&version=5.1904&itemUrlScheme=secure&reqAttempt=1";
+            //gotURL = "https://feed.tunein.com/profiles/s151799/nowPlaying?token=eyJwIjpmYWxzZSwidCI6IjIwMjItMDgtMDZUMTM6NDg6NTIuMzY1MDAwNVoifQ&itemToken=BgUFAAEAAQABAAEAb28B91ACAAEFAAA&formats=mp3,aac,ogg,flash,html,hls,wma&serial=9275b839-1f68-4ff5-8c9b-18162687b82a&partnerId=RadioTime&version=5.1904&itemUrlScheme=secure&reqAttempt=1";
+            gotStation = "thirdrock";
         }
     }
 
