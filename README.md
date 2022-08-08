@@ -1,8 +1,8 @@
 ## Now Playing on FM La Paz/ThirdRock (Windows version)
 
-![Notification](assets/now_playing.png)
+![Notification](assets/nowPlaying_mainWindow.png)
 
-This is currently one of the versions that still can get info from FM La Paz's website. The other is the MacOS version. Gnome can't connect to such URL anymore. Probably due to a security certificate issue.
+This is currently one of the versions that still can get info from FM La Paz's website. The other is the MacOS version. The Gnome 40+ version can't fetch the URL anymore. Probably due to a security certificate issue.
 
 Sometimes FMLaPaz's is on *sleep mode*, so the URL that provides the JSON file with the current Playing song cannot be parsed. Thus, I added another station: *Third Rock* and another URL to search for the current song.
 
@@ -17,7 +17,7 @@ Please download one of the following and expand it to any folder and execute the
 
 - Windows7, 10 version is available [here](https://github.com/ndlopez/NowPlaying/raw/master/pre-release.zip). Requires Windows Desktop Runtime v5.0, apparently still supported on Windows7
 
-- Windows 10,11 version is available [here](https://github.com/ndlopez/NowPlaying/raw/master/pre-release-upd.zip). Requires Windows Desktop Runtime v3.1
+- Windows 10,11 version is available [here](https://github.com/ndlopez/NowPlaying/raw/master/NowPlaying_newGUI.zip). Requires Windows Desktop Runtime v3.1
 
 A warning (about running software from unknown sources) will pop up, just click OK to continue.
 
@@ -39,6 +39,10 @@ the current song playing on [FM La Paz](https://www.lapaz.fm).
 	- obj/NowPlaying.csproj.nuget.dgspec.json, change all NET 5.0 to netcoreapp3.1
 	- obj/project.assets.json, change all NET 5.0 to netcoreapp3.1
 
+### Needed Feature
+
+The artwork img should be shown in the notification. Thus far I have not searched anything related.
+
 ### Acknowledgments:
 
 Thanks to all the following references, 
@@ -58,6 +62,6 @@ it took me about 4hours to develop this application.
 
 - Programming language: C#
 
-- Editor: VS Code 2019 Community Edition.
+- Editor: VS Code 2019 Community Edition (NetCore3.1).
 
 - Environment: Panasonic Let's Note/ Windows10 Pro

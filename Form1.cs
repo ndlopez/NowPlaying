@@ -66,15 +66,17 @@ namespace NowPlaying
                 nowPlayingLabel.Text = auxVar[0];//GetImgAsync(); //
 
                 notifyIcon1.Text = myTime + "Now: " + nowSong.ToString();
-                nowPlayingAlbum.Text = GetImgPath(nowSong.ToString());
+                
 
                 if (GetImgPath(nowSong.ToString()) != "0")
                 {
                     nowArtwork.ImageLocation = GetImgPath(nowSong.ToString());
+                    nowPlayingAlbum.Text = "";//GetImgPath(nowSong.ToString());
                 }
                 else
                 {
                     nowArtwork.ImageLocation = "https://lastfm.freetls.fastly.net/i/u/174s/c1322f3a5c3fcf4810078a14c4caae11.png";
+                    nowPlayingAlbum.Text = "Couldn't fetch img :(";
                 }
             }
             catch (Exception)
