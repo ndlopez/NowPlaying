@@ -24,6 +24,10 @@ namespace NowPlaying
     {
         static System.Timers.Timer songTimer;
         public string gotStation;
+        //get User screen size: does not recognize
+        /*public double height = SystemParameters.FullPrimaryScreenHeight;
+        public double width = SystemParameters.FullPrimaryScreenWidth;
+        public double resolution = height * width*/
         public Form1()
         {
             InitializeComponent();

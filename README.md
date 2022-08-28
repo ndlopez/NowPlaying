@@ -1,10 +1,8 @@
-## Now Playing on ThirdRock/FM La Paz (Windows version)
+## Now Playing on ThirdRock (Windows version)
 
 ![Notification](assets/nowPlaying_mainWindow.png)
 
-This is currently one of the versions that still can get info from FM La Paz's website. The other is the MacOS version. The Gnome 40+ version can't fetch the URL anymore. Probably due to a security certificate issue.
-
-Sometimes FMLaPaz's is on *sleep mode*, so the URL that provides the JSON file with the current Playing song cannot be parsed. Thus, I added another station: *Third Rock* and another URL to search for the current song.
+The fecthed URL from FMLaPaz.fm cannot be parsed on C# due to a Security issue and peer. Thus, this app no longer displays the current playing song on fm LaPaz but another station: *Third Rock*.
 
 As a bonus I added one extra feat. on the GUI --artwork--.
 
@@ -21,7 +19,7 @@ Please download one of the following and expand it to any folder and execute the
 
 A warning (about running software from unknown sources) will pop up, just click OK to continue.
 
-> This application does NOT collect any sort of data and is NOT associated by any way with thirdrockradio.net nor lapaz.fm.
+> This application does NOT collect any sort of data and is NOT associated by any way nor means with thirdrockradio.net.
 
 To update right-click on the icon (headphones) then select <Update> option. 
 It is also possible to update by selecting <Show> to display the app and then minimize again.
@@ -32,7 +30,7 @@ It is also possible to update by selecting <Show> to display the app and then mi
 ### Known issues:
 
 1. The application will run as soon as is minimized. It will show at the System Tray 
-the current song playing on [ThirdRockRadio](thirdrockradio.net) -- which is set by default -- or [FM La Paz](https://www.lapaz.fm).
+the current song playing on [ThirdRockRadio](thirdrockradio.net) -- which is set by default.
 2. It should auto-update after 4minutes, however due to a problem with an async function it does not.
 3. VS Community Ed. no longer supports Framework NET 5.0, therefore, the following files should be updated to a long-term version:
 
