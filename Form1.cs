@@ -13,6 +13,7 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Timers;
+//using System.Windows;
 using System.Windows.Forms;
 using System.Xml;
 
@@ -75,7 +76,8 @@ namespace NowPlaying
                 }
                 else
                 {
-                    nowArtwork.ImageLocation = "https://lastfm.freetls.fastly.net/i/u/174s/c1322f3a5c3fcf4810078a14c4caae11.png";
+                    nowArtwork.ImageLocation = "http://cdn-profiles.tunein.com/s151799/images/logoq.jpg?t=636355620405200000"; 
+                    //"https://lastfm.freetls.fastly.net/i/u/174s/c1322f3a5c3fcf4810078a14c4caae11.png";
                     nowPlayingAlbum.Text = "Couldn't fetch img :(";
                 }
             }
@@ -92,20 +94,22 @@ namespace NowPlaying
 
         public async Task<string> GetDataAsync()
         {
-            //string thirdRockURL = this is default
-            string gotURL = "https://feed.tunein.com/profiles/s151799/nowPlaying?token=eyJwIjpmYWxzZSwidCI6IjIwMjItMDgtMDZUMTM6NDg6NTIuMzY1MDAwNVoifQ&itemToken=BgUFAAEAAQABAAEAb28B91ACAAEFAAA&formats=mp3,aac,ogg,flash,html,hls,wma&serial=9275b839-1f68-4ff5-8c9b-18162687b82a&partnerId=RadioTime&version=5.1904&itemUrlScheme=secure&reqAttempt=1";
+            //string thirdRockURL = default
+            string gotURL = "https://feed.tunein.com/profiles/s151799/nowPlaying";
+            //"?token=eyJwIjpmYWxzZSwidCI6IjIwMjItMDgtMDZUMTM6NDg6NTIuMzY1MDAwNVoifQ&itemToken=BgUFAAEAAQABAAEAb28B91ACAAEFAAA&formats=mp3,aac,ogg,flash,html,hls,wma&serial=9275b839-1f68-4ff5-8c9b-18162687b82a&partnerId=RadioTime&version=5.1904&itemUrlScheme=secure&reqAttempt=1";
             string firstProp = "Header";
             string currSong = "";
 
             if (gotStation == "fmlapaz")
             {
                 firstProp = "data";
-                gotURL = "https://icecasthd.net:2199/rpc/lapazfm/streaminfo.get";
+                gotURL = "https://stream.consultoradas.com/cp/get_info.php?p=8042";
+                // the above is JSON formatted but not accessible
             }
 
             var httpClient = new HttpClient();
             var releasesResponse = await JsonDocument.ParseAsync(await httpClient.GetStreamAsync(
-                gotURL));            
+                gotURL));
 
             var root = releasesResponse.RootElement.GetProperty(firstProp);
 
@@ -123,17 +127,16 @@ namespace NowPlaying
                     while (props.MoveNext())
                     {
                         var prop = props.Current;
-                        if (prop.Name == "song")//song
+                        if (prop.Name == "title")//song
                         {
                             currSong = prop.Value.ToString();
                         }
                         else { currSong = "No song found"; }
                     }
 
-                }
-            
+                }            
             }
-            
+            //default case Search on ThirdRock
             var thirdElm = root.EnumerateObject();
             while (thirdElm.MoveNext())
             {
@@ -181,8 +184,10 @@ namespace NowPlaying
                     {
                         if (nodes.Attributes != null && nodes.HasChildNodes)
                         {
-                            if (jdx == 2)
-                                //jdx = 2 is img size 174x174
+                            /*if (jdx == 2)
+                                //jdx = 2 is img size 174x174 too large for smaller screens
+                                text = nodes.FirstChild.Value;*/
+                            if (jdx == 1)
                                 text = nodes.FirstChild.Value;
                         }
                         else { text = "No values here."; }
@@ -232,7 +237,7 @@ namespace NowPlaying
 
         private void fMLaPazToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //gotURL = "https://icecasthd.net:2199/rpc/lapazfm/streaminfo.get";
+            //oldURL = "https://icecasthd.net:2199/rpc/lapazfm/streaminfo.get";
             gotStation = "fmlapaz";
         }
 
