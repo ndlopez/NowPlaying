@@ -122,10 +122,10 @@ namespace NowPlaying
             // 
             // nowArtwork
             // 
-            this.nowArtwork.Location = new System.Drawing.Point(40, 40);
+            this.nowArtwork.Location = new System.Drawing.Point(20, 20);
             this.nowArtwork.Margin = new System.Windows.Forms.Padding(4);
             this.nowArtwork.Name = "nowArtwork";
-            this.nowArtwork.Size = new System.Drawing.Size(174, 174);
+            this.nowArtwork.Size = new System.Drawing.Size(175, 175);
             this.nowArtwork.TabIndex = 1;
             this.nowArtwork.TabStop = false;
             // 
