@@ -15,7 +15,7 @@ Please download one of the following and expand it to any folder and execute the
 
 - Windows7, 10 version is available [here](https://github.com/ndlopez/NowPlaying/raw/master/pre_release/pre-release.zip). Requires Windows Desktop Runtime v5.0, apparently still supported on Windows7
 
-- Windows 10,11 version is available [here](https://github.com/ndlopez/NowPlaying/raw/master/pre_release/nowPlaying_new_gui.zip). Requires Windows Desktop Runtime v3.1
+- Windows 10,11 version is available [here](https://github.com/ndlopez/NowPlaying/raw/master/pre_release/nowPlaying_new.zip). Requires Windows Desktop Runtime v3.1
 
 A warning (about running software from unknown sources) will pop up, just click OK to continue.
 
