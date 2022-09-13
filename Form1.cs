@@ -188,11 +188,12 @@ namespace NowPlaying
                     {
                         if (nodes.Attributes != null && nodes.HasChildNodes)
                         {
-                            /*if (jdx == 2)
+                            if (jdx == 2)
                                 //jdx = 2 is img size 174x174 too large for smaller screens
-                                text = nodes.FirstChild.Value;*/
-                            if (jdx == 1)
                                 text = nodes.FirstChild.Value;
+                            /*if (jdx == 1)
+                                // Img is small for 1080 screen
+                                text = nodes.FirstChild.Value;*/
                         }
                         else { text = "No values here."; }
                         jdx += 1;
