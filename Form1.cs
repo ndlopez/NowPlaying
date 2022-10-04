@@ -64,32 +64,33 @@ namespace NowPlaying
                 int myUpdate = 3000; //duration time in ms
                 var myTime = DateTime.Now.ToString("HH:mm  ");
                 string thisStation = "Third Rock";
-                var auxVar = nowSong.ToString().Split("-");
+                var auxVar = nowSong.ToString().Split(",");
+                var aux2 = auxVar[0].ToString().Split("-");
                 //Console.WriteLine(nowSong);
-                notifyIcon1.ShowBalloonTip(myUpdate, DateTime.Now.ToString("HH:mm") + " Now on " + thisStation, nowSong.ToString(), ToolTipIcon.Info);
+                notifyIcon1.ShowBalloonTip(myUpdate, DateTime.Now.ToString("HH:mm") + " Now on " + thisStation, auxVar[0].ToString(), ToolTipIcon.Info);
 
                 nowTime.Text = myTime;
-                nowArtist.Text = auxVar[1].Trim();
-                nowPlayingLabel.Text = auxVar[0];//GetImgAsync(); //
+                nowArtist.Text = aux2[1].Trim();
+                nowPlayingLabel.Text = aux2[0];//GetImgAsync(); //
 
-                notifyIcon1.Text = myTime + "Now: " + nowSong.ToString();
+                notifyIcon1.Text = myTime + "Now: " + auxVar[0].ToString();
                 
-
-                if (GetImgPath(nowSong.ToString()) != "0")
+                if (GetImgPath(auxVar[0].ToString()) != "")
                 {
-                    nowArtwork.ImageLocation = GetImgPath(nowSong.ToString());
+                    nowArtwork.ImageLocation = GetImgPath(auxVar[0].ToString());
                     nowPlayingAlbum.Text = "";//GetImgPath(nowSong.ToString());
                 }
                 else
                 {
-                    nowArtwork.ImageLocation = "http://cdn-profiles.tunein.com/s151799/images/logoq.jpg?t=636355620405200000"; 
+                    nowArtwork.ImageLocation = auxVar[1].ToString();
+                    //"http://cdn-profiles.tunein.com/s151799/images/logoq.jpg?t=636355620405200000"; 
                     //"https://lastfm.freetls.fastly.net/i/u/174s/c1322f3a5c3fcf4810078a14c4caae11.png";
-                    nowPlayingAlbum.Text = "Couldn't fetch img :(";
+                    nowPlayingAlbum.Text = "AudioScrobbler error:(";
                 }
             }
             catch (Exception)
             {
-                notifyIcon1.ShowBalloonTip(5000, "Cannot connect to URL", "Error", ToolTipIcon.Error);
+                notifyIcon1.ShowBalloonTip(3000, "Cannot connect to URL", "Error", ToolTipIcon.Error);
             }
         }
 
@@ -104,7 +105,9 @@ namespace NowPlaying
             string gotURL = "https://feed.tunein.com/profiles/s151799/nowPlaying";
             //"?token=eyJwIjpmYWxzZSwidCI6IjIwMjItMDgtMDZUMTM6NDg6NTIuMzY1MDAwNVoifQ&itemToken=BgUFAAEAAQABAAEAb28B91ACAAEFAAA&formats=mp3,aac,ogg,flash,html,hls,wma&serial=9275b839-1f68-4ff5-8c9b-18162687b82a&partnerId=RadioTime&version=5.1904&itemUrlScheme=secure&reqAttempt=1";
             string firstProp = "Header";
+            string secProp = "Secondary";
             string currSong = "";
+            string gotImg = "";
 
             if (gotStation == "fmlapaz")
             {
@@ -118,6 +121,7 @@ namespace NowPlaying
                 gotURL));
 
             var root = releasesResponse.RootElement.GetProperty(firstProp);
+            var sec_root = releasesResponse.RootElement.GetProperty(secProp);
 
             if (gotStation == "fmlapaz") { 
                 var elems = root.EnumerateArray();
@@ -152,8 +156,17 @@ namespace NowPlaying
                     currSong = myProp.Value.ToString();
                 }
             }
-            
-            return currSong;
+            var imgElm = sec_root.EnumerateObject();
+            while (imgElm.MoveNext())
+            {
+                var myProp = imgElm.Current;
+                if (myProp.Name == "Image")
+                {
+                    gotImg = myProp.Value.ToString();
+                }
+            }
+            //nowPlayingAlbum.Text = gotImg;
+            return currSong + "," + gotImg;
         }
 
         private String GetImgPath(string currentSong)
@@ -201,7 +214,7 @@ namespace NowPlaying
                         jdx += 1;
                     }
                 }
-                else { text = "0"; }
+                else { text = ""; }
             }
             catch
             {
@@ -245,7 +258,7 @@ namespace NowPlaying
             if (isPlaying)
             {
                 isPlaying = false;
-                //gifImg.ImageLocation = "assets/equalizer.gif";
+                gifImg.ImageLocation = "https://raw.githubusercontent.com/ndlopez/fmLaPazNow/main/assets/equalizer.gif";
                 //playBtn.Enabled = false;
                 //stopBtn.Enabled = true;
                 try 

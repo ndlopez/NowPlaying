@@ -187,10 +187,9 @@ namespace NowPlaying
             // gifImg
             // 
             this.gifImg.BackColor = System.Drawing.Color.DimGray;
-            this.gifImg.Image = ((System.Drawing.Image)(resources.GetObject("gifImg.Image")));
-            this.gifImg.Location = new System.Drawing.Point(370, 380);
+            this.gifImg.Location = new System.Drawing.Point(370, 361);
             this.gifImg.Name = "gifImg";
-            this.gifImg.Size = new System.Drawing.Size(227, 151);
+            this.gifImg.Size = new System.Drawing.Size(227, 170);
             this.gifImg.TabIndex = 7;
             this.gifImg.TabStop = false;
             // 
