@@ -23,6 +23,7 @@ namespace NowPlaying
     {
         // static System.Timers.Timer songTimer;
         public string gotStation;
+        public bool isPlaying = true;
         // public object playStream = new WMPLib.WindowsMediaPlayer();
         //get User screen size: does not recognize
         /*public double height = SystemParameters.FullPrimaryScreenHeight;
@@ -228,13 +229,11 @@ namespace NowPlaying
 
         private void fMLaPazToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //oldURL = "https://icecasthd.net:2199/rpc/lapazfm/streaminfo.get";
             gotStation = "fmlapaz";
         }
 
         private void thirdRockToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //gotURL = "https://feed.tunein.com/profiles/s151799/nowPlaying?token=eyJwIjpmYWxzZSwidCI6IjIwMjItMDgtMDZUMTM6NDg6NTIuMzY1MDAwNVoifQ&itemToken=BgUFAAEAAQABAAEAb28B91ACAAEFAAA&formats=mp3,aac,ogg,flash,html,hls,wma&serial=9275b839-1f68-4ff5-8c9b-18162687b82a&partnerId=RadioTime&version=5.1904&itemUrlScheme=secure&reqAttempt=1";
             gotStation = "thirdrock";
         }
 
@@ -242,25 +241,34 @@ namespace NowPlaying
         {
             var playStream = new WMPLib.WindowsMediaPlayer();
             playStream.URL = "https://rfcmedia3.streamguys1.com/thirdrock.mp3";
-            playBtn.Enabled = false;
-            stopBtn.Enabled = true;
-            try 
+            if (isPlaying)
             {
-                playStream.controls.play();
+                isPlaying = false;
+                //playBtn.Enabled = false;
+                //stopBtn.Enabled = true;
+                try 
+                {
+                    playStream.controls.play();
+                    nowPlayingAlbum.Text = "";
+                }
+                catch
+                {
+                    nowPlayingAlbum.Text = "Buffering Stream";
+                }
             }
-            catch
+            else
             {
-                nowPlayingAlbum.Text = "Buffering Stream";
+                isPlaying = true;
+                playStream.controls.stop();
+                nowPlayingAlbum.Text = "Stream stopped.";
             }
+            
         }
 
         private void stopBtn_Click(object sender, EventArgs e)
         {
             playBtn.Enabled = true;
             stopBtn.Enabled = false;
-            var playStream = new WMPLib.WindowsMediaPlayer();
-
-            playStream.controls.stop();
         }
     }
 
