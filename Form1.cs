@@ -241,9 +241,11 @@ namespace NowPlaying
         {
             var playStream = new WMPLib.WindowsMediaPlayer();
             playStream.URL = "https://rfcmedia3.streamguys1.com/thirdrock.mp3";
+            
             if (isPlaying)
             {
                 isPlaying = false;
+                //gifImg.ImageLocation = "assets/equalizer.gif";
                 //playBtn.Enabled = false;
                 //stopBtn.Enabled = true;
                 try 
@@ -253,13 +255,13 @@ namespace NowPlaying
                 }
                 catch
                 {
-                    nowPlayingAlbum.Text = "Buffering Stream";
+                    nowPlayingAlbum.Text = "Buffering...";
                 }
             }
             else
             {
                 isPlaying = true;
-                playStream.controls.stop();
+                playStream.controls.stop(); //does NOT work :(
                 nowPlayingAlbum.Text = "Stream stopped.";
             }
             
