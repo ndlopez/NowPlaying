@@ -13,7 +13,6 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Timers;
-//using System.Windows;
 using System.Windows.Forms;
 using System.Xml;
 
@@ -22,8 +21,9 @@ namespace NowPlaying
 {
     public partial class Form1 : Form
     {
-        static System.Timers.Timer songTimer;
+        // static System.Timers.Timer songTimer;
         public string gotStation;
+        // public object playStream = new WMPLib.WindowsMediaPlayer();
         //get User screen size: does not recognize
         /*public double height = SystemParameters.FullPrimaryScreenHeight;
         public double width = SystemParameters.FullPrimaryScreenWidth;
@@ -66,8 +66,9 @@ namespace NowPlaying
                 var auxVar = nowSong.ToString().Split("-");
                 //Console.WriteLine(nowSong);
                 notifyIcon1.ShowBalloonTip(myUpdate, DateTime.Now.ToString("HH:mm") + " Now on " + thisStation, nowSong.ToString(), ToolTipIcon.Info);
-                
-                nowArtist.Text = myTime + "\n" + auxVar[1].Trim();
+
+                nowTime.Text = myTime;
+                nowArtist.Text = auxVar[1].Trim();
                 nowPlayingLabel.Text = auxVar[0];//GetImgAsync(); //
 
                 notifyIcon1.Text = myTime + "Now: " + nowSong.ToString();
@@ -217,27 +218,12 @@ namespace NowPlaying
         private void schedule_Timer()
         {
             Console.WriteLine("### Timer Started ###");
-
-            DateTime nowTime = DateTime.Now;
-            DateTime scheduledTime = new DateTime(nowTime.Year, nowTime.Month, nowTime.Day, nowTime.Hour, nowTime.Minute, 0, 0); //Specify your scheduled time HH,MM,SS [8am and 42 minutes]
-            if (nowTime > scheduledTime)
-            {
-                scheduledTime = scheduledTime.AddMinutes(1);
-                //scheduledTime = scheduledTime.AddDays(1);
-            }
-
-            double tickTime = (double)(scheduledTime - DateTime.Now).TotalMilliseconds;
-            songTimer = new System.Timers.Timer(tickTime);
-            songTimer.Elapsed += new ElapsedEventHandler(timer_Elapsed);
-            songTimer.Start();
         }
 
         private void timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             Console.WriteLine("### Timer Stopped ### \n");
             NotifyLoader();
-            songTimer.Stop();
-            schedule_Timer();
         }
 
         private void fMLaPazToolStripMenuItem_Click(object sender, EventArgs e)
@@ -250,6 +236,31 @@ namespace NowPlaying
         {
             //gotURL = "https://feed.tunein.com/profiles/s151799/nowPlaying?token=eyJwIjpmYWxzZSwidCI6IjIwMjItMDgtMDZUMTM6NDg6NTIuMzY1MDAwNVoifQ&itemToken=BgUFAAEAAQABAAEAb28B91ACAAEFAAA&formats=mp3,aac,ogg,flash,html,hls,wma&serial=9275b839-1f68-4ff5-8c9b-18162687b82a&partnerId=RadioTime&version=5.1904&itemUrlScheme=secure&reqAttempt=1";
             gotStation = "thirdrock";
+        }
+
+        private void playBtn_Click(object sender, EventArgs e)
+        {
+            var playStream = new WMPLib.WindowsMediaPlayer();
+            playStream.URL = "https://rfcmedia3.streamguys1.com/thirdrock.mp3";
+            playBtn.Enabled = false;
+            stopBtn.Enabled = true;
+            try 
+            {
+                playStream.controls.play();
+            }
+            catch
+            {
+                nowPlayingAlbum.Text = "Buffering Stream";
+            }
+        }
+
+        private void stopBtn_Click(object sender, EventArgs e)
+        {
+            playBtn.Enabled = true;
+            stopBtn.Enabled = false;
+            var playStream = new WMPLib.WindowsMediaPlayer();
+
+            playStream.controls.stop();
         }
     }
 

@@ -43,6 +43,9 @@ namespace NowPlaying
             this.nowArtwork = new System.Windows.Forms.PictureBox();
             this.nowArtist = new System.Windows.Forms.Label();
             this.nowPlayingAlbum = new System.Windows.Forms.Label();
+            this.nowTime = new System.Windows.Forms.Label();
+            this.playBtn = new System.Windows.Forms.Button();
+            this.stopBtn = new System.Windows.Forms.Button();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nowArtwork)).BeginInit();
             this.SuspendLayout();
@@ -51,7 +54,7 @@ namespace NowPlaying
             // 
             this.nowPlayingLabel.AutoSize = true;
             this.nowPlayingLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.nowPlayingLabel.Location = new System.Drawing.Point(240, 130);
+            this.nowPlayingLabel.Location = new System.Drawing.Point(240, 19);
             this.nowPlayingLabel.Name = "nowPlayingLabel";
             this.nowPlayingLabel.Size = new System.Drawing.Size(172, 48);
             this.nowPlayingLabel.TabIndex = 0;
@@ -122,7 +125,7 @@ namespace NowPlaying
             // 
             // nowArtwork
             // 
-            this.nowArtwork.Location = new System.Drawing.Point(20, 20);
+            this.nowArtwork.Location = new System.Drawing.Point(0, 0);
             this.nowArtwork.Margin = new System.Windows.Forms.Padding(4);
             this.nowArtwork.Name = "nowArtwork";
             this.nowArtwork.Size = new System.Drawing.Size(175, 175);
@@ -132,28 +135,61 @@ namespace NowPlaying
             // nowArtist
             // 
             this.nowArtist.AutoSize = true;
-            this.nowArtist.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.nowArtist.Location = new System.Drawing.Point(240, 30);
+            this.nowArtist.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.nowArtist.Location = new System.Drawing.Point(240, 100);
             this.nowArtist.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.nowArtist.Name = "nowArtist";
-            this.nowArtist.Size = new System.Drawing.Size(188, 48);
+            this.nowArtist.Size = new System.Drawing.Size(157, 41);
             this.nowArtist.TabIndex = 2;
             this.nowArtist.Text = "Now Artist";
             // 
             // nowPlayingAlbum
             // 
             this.nowPlayingAlbum.AutoSize = true;
-            this.nowPlayingAlbum.Location = new System.Drawing.Point(240, 190);
+            this.nowPlayingAlbum.Location = new System.Drawing.Point(380, 170);
             this.nowPlayingAlbum.Name = "nowPlayingAlbum";
             this.nowPlayingAlbum.Size = new System.Drawing.Size(90, 37);
             this.nowPlayingAlbum.TabIndex = 3;
             this.nowPlayingAlbum.Text = "label1";
             // 
+            // nowTime
+            // 
+            this.nowTime.AutoSize = true;
+            this.nowTime.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.nowTime.Location = new System.Drawing.Point(240, 170);
+            this.nowTime.Name = "nowTime";
+            this.nowTime.Size = new System.Drawing.Size(97, 41);
+            this.nowTime.TabIndex = 4;
+            this.nowTime.Text = "label1";
+            // 
+            // playBtn
+            // 
+            this.playBtn.Location = new System.Drawing.Point(691, 177);
+            this.playBtn.Name = "playBtn";
+            this.playBtn.Size = new System.Drawing.Size(56, 56);
+            this.playBtn.TabIndex = 5;
+            this.playBtn.Text = "P";
+            this.playBtn.UseVisualStyleBackColor = true;
+            this.playBtn.Click += new System.EventHandler(this.playBtn_Click);
+            // 
+            // stopBtn
+            // 
+            this.stopBtn.Location = new System.Drawing.Point(786, 177);
+            this.stopBtn.Name = "stopBtn";
+            this.stopBtn.Size = new System.Drawing.Size(56, 56);
+            this.stopBtn.TabIndex = 6;
+            this.stopBtn.Text = "S";
+            this.stopBtn.UseVisualStyleBackColor = true;
+            this.stopBtn.Click += new System.EventHandler(this.stopBtn_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(15F, 37F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(777, 241);
+            this.ClientSize = new System.Drawing.Size(872, 241);
+            this.Controls.Add(this.stopBtn);
+            this.Controls.Add(this.playBtn);
+            this.Controls.Add(this.nowTime);
             this.Controls.Add(this.nowPlayingAlbum);
             this.Controls.Add(this.nowArtist);
             this.Controls.Add(this.nowArtwork);
@@ -184,6 +220,9 @@ namespace NowPlaying
         private System.Windows.Forms.ToolStripMenuItem stationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem fMLaPazToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem thirdRockToolStripMenuItem;
+        private System.Windows.Forms.Label nowTime;
+        private System.Windows.Forms.Button playBtn;
+        private System.Windows.Forms.Button stopBtn;
     }
 }
 
