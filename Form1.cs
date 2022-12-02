@@ -78,14 +78,14 @@ namespace NowPlaying
                 if (GetImgPath(auxVar[0].ToString()) != "")
                 {
                     nowArtwork.ImageLocation = GetImgPath(auxVar[0].ToString());
-                    nowPlayingAlbum.Text = "";//GetImgPath(nowSong.ToString());
+                    nowPlayingAlbum.Text = "Status: OK";//GetImgPath(nowSong.ToString());
                 }
                 else
                 {
                     nowArtwork.ImageLocation = auxVar[1].ToString();
                     //"http://cdn-profiles.tunein.com/s151799/images/logoq.jpg?t=636355620405200000"; 
                     //"https://lastfm.freetls.fastly.net/i/u/174s/c1322f3a5c3fcf4810078a14c4caae11.png";
-                    nowPlayingAlbum.Text = "AudioScrobbler error:(";
+                    nowPlayingAlbum.Text = "Status: AudioScrobbler error";
                 }
             }
             catch (Exception)
@@ -203,14 +203,14 @@ namespace NowPlaying
                     {
                         if (nodes.Attributes != null && nodes.HasChildNodes)
                         {
-                            if (jdx == 2)
+                            if (jdx == 3)
                                 //jdx = 2 is img size 174x174 too large for smaller screens
                                 text = nodes.FirstChild.Value;
                             /*if (jdx == 1)
                                 // Img is small for 1080 screen
                                 text = nodes.FirstChild.Value;*/
                         }
-                        else { text = "No values here."; }
+                        else { text = "assets/cd_case_274px.png"; }
                         jdx += 1;
                     }
                 }
@@ -253,8 +253,10 @@ namespace NowPlaying
         private void playBtn_Click(object sender, EventArgs e)
         {
             var playStream = new WMPLib.WindowsMediaPlayer();
-            playStream.URL = "https://rfcmedia3.streamguys1.com/thirdrock.mp3";
-            
+            //playStream.URL = "https://rfcmedia3.streamguys1.com/thirdrock.mp3";
+            playStream.URL = "https://rfcmedia3.streamguys1.com/thirdrock.aac";
+
+
             if (isPlaying)
             {
                 isPlaying = false;
@@ -264,7 +266,7 @@ namespace NowPlaying
                 try 
                 {
                     playStream.controls.play();
-                    nowPlayingAlbum.Text = "";
+                    nowPlayingAlbum.Text = "Now Streaming...";
                 }
                 catch
                 {
