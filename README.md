@@ -1,10 +1,7 @@
-## Now Playing on ThirdRock (Windows version)
+## Now Playing on ThirdRock Radio (Windows 10/11 version)
 
-![Notification](assets/nowPlaying_mainWindow.png)
+![Notification](assets/NowPlaying_new_ui.png)
 
-The fecthed URL from FMLaPaz.fm cannot be parsed on C# due to a Security issue and peer. Thus, this app no longer displays the current playing song on fm LaPaz but another station: *Third Rock*.
-
-As a bonus I added one extra feat. on the GUI --artwork--.
 
 ### Installation:
 
@@ -13,7 +10,7 @@ As a bonus I added one extra feat. on the GUI --artwork--.
 **Pre-Release** 
 Please download one of the following and expand it to any folder and execute the file *NowPlaying.exe*.
 
-- Windows7, 10 version is available [here](https://github.com/ndlopez/NowPlaying/raw/master/pre_release/pre-release.zip). Requires Windows Desktop Runtime v5.0, apparently still supported on Windows7
+- Windows7, 10 version is still available [here](https://github.com/ndlopez/NowPlaying/raw/master/pre_release/nowPlaying_net5.zip). Requires Windows Desktop Runtime v5.0, apparently still supported on Windows7
 
 - Windows 10,11 version is available [here](https://github.com/ndlopez/NowPlaying/raw/master/pre_release/nowPlaying_new.zip). Requires Windows Desktop Runtime v3.1
 
@@ -37,7 +34,7 @@ the current song playing on [ThirdRockRadio](thirdrockradio.net) -- which is set
 	- NowPlaying.cs: 5 netcoreapp3.1
 	- obj/NowPlaying.csproj.nuget.dgspec.json, change all NET 5.0 to netcoreapp3.1
 	- obj/project.assets.json, change all NET 5.0 to netcoreapp3.1
-4. Since this application was developed in a 2K display, the fetched artwork on a 1K display (the one I have @work) is 1/4 the size of the original -- shown here in the screenshot above--.
+4. Since this application was developed in a 2K display, the fetched artwork on a 1K display is 1/4 the size of the original -- shown here in the screenshot above--.
 
 ![1/4 artwork](assets/artwork_size.png)
 
@@ -65,5 +62,5 @@ it took me about 4hours to develop this application.
 
 - Programming language: C#
 - Editor: VS Code 2019 Community Edition (NetCore3.1).
-- Environment: Panasonic Let's Note/ Windows10 Pro
+- Environment: Panasonic Let's Note/ Windows 10 Pro
 - Display settings: 2880 x 1920
