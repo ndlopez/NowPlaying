@@ -258,9 +258,9 @@ namespace NowPlaying
             if (isPlaying)
             {
                 isPlaying = false;
-                gifImg.ImageLocation = "https://raw.githubusercontent.com/ndlopez/fmLaPazNow/main/assets/equalizer.gif";
-                //playBtn.Enabled = false;
-                //stopBtn.Enabled = true;
+                // gifImg.ImageLocation = "https://raw.githubusercontent.com/ndlopez/fmLaPazNow/main/assets/equalizer.gif";
+                // playBtn.Enabled = false;
+                // stopBtn.Enabled = true;
                 try 
                 {
                     playStream.controls.play();
