@@ -56,7 +56,8 @@ namespace NowPlaying
             // 
             this.nowPlayingLabel.AutoSize = true;
             this.nowPlayingLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.nowPlayingLabel.Location = new System.Drawing.Point(20, 240);
+            this.nowPlayingLabel.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.nowPlayingLabel.Location = new System.Drawing.Point(326, 13);
             this.nowPlayingLabel.Name = "nowPlayingLabel";
             this.nowPlayingLabel.Size = new System.Drawing.Size(101, 48);
             this.nowPlayingLabel.TabIndex = 0;
@@ -127,10 +128,10 @@ namespace NowPlaying
             // 
             // nowArtwork
             // 
-            this.nowArtwork.Location = new System.Drawing.Point(200, 30);
+            this.nowArtwork.Location = new System.Drawing.Point(13, 24);
             this.nowArtwork.Margin = new System.Windows.Forms.Padding(4);
             this.nowArtwork.Name = "nowArtwork";
-            this.nowArtwork.Size = new System.Drawing.Size(180, 180);
+            this.nowArtwork.Size = new System.Drawing.Size(256, 256);
             this.nowArtwork.TabIndex = 1;
             this.nowArtwork.TabStop = false;
             // 
@@ -138,7 +139,8 @@ namespace NowPlaying
             // 
             this.nowArtist.AutoSize = true;
             this.nowArtist.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.nowArtist.Location = new System.Drawing.Point(20, 320);
+            this.nowArtist.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.nowArtist.Location = new System.Drawing.Point(326, 96);
             this.nowArtist.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.nowArtist.Name = "nowArtist";
             this.nowArtist.Size = new System.Drawing.Size(87, 41);
@@ -148,7 +150,8 @@ namespace NowPlaying
             // nowPlayingAlbum
             // 
             this.nowPlayingAlbum.AutoSize = true;
-            this.nowPlayingAlbum.Location = new System.Drawing.Point(160, 400);
+            this.nowPlayingAlbum.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.nowPlayingAlbum.Location = new System.Drawing.Point(326, 243);
             this.nowPlayingAlbum.Name = "nowPlayingAlbum";
             this.nowPlayingAlbum.Size = new System.Drawing.Size(127, 37);
             this.nowPlayingAlbum.TabIndex = 3;
@@ -158,7 +161,8 @@ namespace NowPlaying
             // 
             this.nowTime.AutoSize = true;
             this.nowTime.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.nowTime.Location = new System.Drawing.Point(20, 400);
+            this.nowTime.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.nowTime.Location = new System.Drawing.Point(326, 173);
             this.nowTime.Name = "nowTime";
             this.nowTime.Size = new System.Drawing.Size(89, 41);
             this.nowTime.TabIndex = 4;
@@ -167,7 +171,7 @@ namespace NowPlaying
             // playBtn
             // 
             this.playBtn.Image = ((System.Drawing.Image)(resources.GetObject("playBtn.Image")));
-            this.playBtn.Location = new System.Drawing.Point(215, 460);
+            this.playBtn.Location = new System.Drawing.Point(883, 210);
             this.playBtn.Name = "playBtn";
             this.playBtn.Size = new System.Drawing.Size(70, 70);
             this.playBtn.TabIndex = 5;
@@ -177,9 +181,9 @@ namespace NowPlaying
             // stopBtn
             // 
             this.stopBtn.Image = ((System.Drawing.Image)(resources.GetObject("stopBtn.Image")));
-            this.stopBtn.Location = new System.Drawing.Point(51, 473);
+            this.stopBtn.Location = new System.Drawing.Point(788, 210);
             this.stopBtn.Name = "stopBtn";
-            this.stopBtn.Size = new System.Drawing.Size(56, 56);
+            this.stopBtn.Size = new System.Drawing.Size(66, 70);
             this.stopBtn.TabIndex = 6;
             this.stopBtn.UseVisualStyleBackColor = true;
             this.stopBtn.Click += new System.EventHandler(this.stopBtn_Click);
@@ -187,7 +191,7 @@ namespace NowPlaying
             // gifImg
             // 
             this.gifImg.BackColor = System.Drawing.Color.DimGray;
-            this.gifImg.Location = new System.Drawing.Point(370, 361);
+            this.gifImg.Location = new System.Drawing.Point(726, 13);
             this.gifImg.Name = "gifImg";
             this.gifImg.Size = new System.Drawing.Size(227, 170);
             this.gifImg.TabIndex = 7;
@@ -197,8 +201,8 @@ namespace NowPlaying
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(15F, 37F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.DimGray;
-            this.ClientSize = new System.Drawing.Size(572, 541);
+            this.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.ClientSize = new System.Drawing.Size(963, 293);
             this.Controls.Add(this.gifImg);
             this.Controls.Add(this.stopBtn);
             this.Controls.Add(this.playBtn);
